@@ -1,6 +1,8 @@
 import * as dao from './users-dao.js'
 import {findByCredentials, findByUsername} from "./users-dao.js";
 
+let currentUser = null
+
 const UsersController = (app) => {
     const createUser = async (req, res) => {
         const user = req.body
@@ -36,7 +38,8 @@ const UsersController = (app) => {
         }
 
         const actualUser = await dao.createUser(user)
-        res.json(actualUser)
+        currentUser = actualUser
+        res.json(currentUser)
     }
 
     const login = async (req, res) => {
@@ -47,8 +50,21 @@ const UsersController = (app) => {
             res.sendStatus(403)
             return
         }
-
+        currentUser = existingUser
         res.json(existingUser)
+    }
+
+    const profile = async (req, res) => {
+        if (currentUser) {
+            res.json(currentUser)
+            return
+        }
+        res.sendStatus(403)
+    }
+
+    const logout = async (req, res) => {
+        currentUser = null
+        res.sendStatus(200)
     }
 
     app.post('/users', createUser)
@@ -58,7 +74,8 @@ const UsersController = (app) => {
 
     app.post('/register', register)
     app.post('/login', login)
-    app.post('/logout')
+    app.post('/profile', profile)
+    app.post('/logout', logout)
 }
 
 export default UsersController
