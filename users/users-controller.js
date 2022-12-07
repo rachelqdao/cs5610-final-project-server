@@ -36,8 +36,8 @@ const UsersController = (app) => {
             return
         }
 
-        currentUser = await dao.createUser(user)
-        res.json(currentUser)
+        req.session['currentUser'] = await dao.createUser(user)
+        res.json(req.session['currentUser'])
     }
 
     const login = async (req, res) => {
@@ -54,15 +54,15 @@ const UsersController = (app) => {
     }
 
     const profile = async (req, res) => {
-        if (currentUser) {
-            res.json(currentUser)
+        if (req.session['currentUser']) {
+            res.json(req.session['currentUser'])
             return
         }
         res.sendStatus(403)
     }
 
     const logout = async (req, res) => {
-        currentUser = null
+        req.session.destroy()
         res.sendStatus(200)
     }
 
