@@ -1,8 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import UsersController from "./users/users-controller.js";
 import cors from "cors";
 import session from 'express-session'
+import UsersController from "./users/users-controller.js";
+import ReviewsController from "./reviews/reviews-controller.js";
 
 /* connect to mongo database */
 const options = {
@@ -36,6 +37,7 @@ app.use(express.json())
 
 /* controllers */
 UsersController(app)
+ReviewsController(app)
 
 app.listen(4000)
 

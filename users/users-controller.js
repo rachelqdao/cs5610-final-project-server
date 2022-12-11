@@ -1,7 +1,5 @@
 import * as dao from './users-dao.js'
 
-let currentUser = null
-
 const UsersController = (app) => {
     const createUser = async (req, res) => {
         const user = req.body
