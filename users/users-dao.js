@@ -18,7 +18,6 @@ export const findByCredentials = (username, password) =>
         {password: false}
     )
 
-
 export const deleteUser = (uid) =>
     usersModel.deleteOne({_id: uid})
 
