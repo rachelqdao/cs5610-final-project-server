@@ -27,8 +27,8 @@ const ReviewsController = (app) => {
 
     const deleteReview = async (req, res) => {
         const reviewID = req.params.reviewID
-        const reviews = await dao.deleteReview(reviewID)
-        res.json(reviews)
+        const review = await dao.deleteReview(reviewID)
+        res.json(review)
     }
 
     app.post('/reviews', createReview)
