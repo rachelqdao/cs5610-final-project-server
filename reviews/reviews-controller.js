@@ -9,6 +9,7 @@ const ReviewsController = (app) => {
         review.timePosted = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
 
         const actualReview = await dao.createReview(review)
+
         res.json(actualReview)
     }
 
