@@ -7,12 +7,12 @@ export const findReadingListsByUserID = (userID) =>
     readingListsModel.find({userID})
 
 export const deleteReadingList = (readingListID) =>
-    readingListsModel.deleteOne({_id: readingListID})
+    readingListsModel.findOneAndDelete({_id: readingListID})
 
-export const addBookToReadingList = (listID, bookID) =>
+export const addBookToReadingList = (listID, bookInfo) =>
     readingListsModel.updateOne({_id: listID},
-        { $addToSet : {books: bookID}})
+        { $addToSet : {books: bookInfo}})
 
 export const deleteBookFromReadingList = (listID, bookID) =>
     readingListsModel.updateOne({_id: listID},
-        { $pull : {books: bookID}})
+        { $pull : {books: {id: bookID}}})

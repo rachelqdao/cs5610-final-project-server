@@ -7,9 +7,14 @@ const readingListsSchema = mongoose.Schema({
     },
     listName: String,
     description: String,
-    books: {
-        type: [String]
-    }
+    books: [
+        {
+            id: String,
+            bookCover: String,
+            title: String,
+            authors: [String]
+        }
+    ]
 }, {collection: 'reading-lists'})
 
 export default readingListsSchema

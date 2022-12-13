@@ -25,27 +25,27 @@ const ReadingListsController = (app) => {
 
     const addBookToReadingList = async (req, res) => {
         const listID = req.params.listID
-        const bookID = req.params.bookID
+        const bookInfo = req.body
 
-        const status = await dao.addBookToReadingList(listID, bookID)
+        const status = await dao.addBookToReadingList(listID, bookInfo)
 
         res.json(status)
     }
 
     const deleteBookFromReadingList = async (req, res) => {
         const listID = req.params.listID
-        const bookID = req.params.bookID
+        const bookInfo = req.body
 
-        const status = await dao.deleteBookFromReadingList(listID, bookID)
+        const status = await dao.deleteBookFromReadingList(listID, bookInfo.id)
 
-        res.json(status)
+        res.json({listID, bookInfo})
     }
 
     app.post('/reading-lists', createReadingList)
     app.get('/reading-lists/:userID', getReadingListsByUserID)
     app.delete('/reading-lists/:listID', deleteReadingList)
-    app.put('/reading-lists/:listID/:bookID/add', addBookToReadingList)
-    app.put('/reading-lists/:listID/:bookID/delete', deleteBookFromReadingList)
+    app.put('/reading-lists/:listID/add', addBookToReadingList)
+    app.put('/reading-lists/:listID/delete', deleteBookFromReadingList)
 }
 
 export default ReadingListsController
