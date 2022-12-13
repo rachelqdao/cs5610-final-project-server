@@ -10,4 +10,4 @@ const usersSchema = mongoose.Schema({
     dateJoined: Date,
 }, {collection: 'users'})
 
-export default usersSchema
+export default usersSchema;

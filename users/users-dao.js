@@ -22,6 +22,9 @@ export const deleteUser = (uid) =>
     usersModel.deleteOne({_id: uid})
 
 
-export const updateUser = (uid, userUpdates) =>
+export const updateUser = (uid, userUpdates) => {
+    console.log(`in users-dao update user BE: ${userUpdates.lastName}`)
     usersModel.updateOne({_id: uid}, {$set: userUpdates})
+}
+
 
