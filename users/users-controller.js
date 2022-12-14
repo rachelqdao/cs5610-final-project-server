@@ -12,6 +12,12 @@ const UsersController = (app) => {
         res.json(users)
     }
 
+    const findUserByID = async (req, res) => {
+        const uid = req.params.uid
+        const user = await dao.findUserByID(uid)
+        res.json(user)
+    }
+
     const deleteUser = async (req, res) => {
         const uid = req.params.uid
         const status = await dao.deleteUser(uid)
@@ -70,6 +76,7 @@ const UsersController = (app) => {
     app.get('/users', findAllUsers)
     app.delete('/users/:uid', deleteUser)
     app.put('/users/:uid', updateUser)
+    app.get('/users/:uid', findUserByID)
 
     app.post('/register', register)
     app.post('/login', login)
