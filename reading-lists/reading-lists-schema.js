@@ -9,7 +9,10 @@ const readingListsSchema = mongoose.Schema({
     description: String,
     books: [
         {
-            id: String,
+            id: {
+                type: String,
+                unique: true
+            },
             bookCover: String,
             title: String,
             authors: [String]
