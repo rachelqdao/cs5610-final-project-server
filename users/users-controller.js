@@ -22,7 +22,7 @@ const UsersController = (app) => {
         const uid = req.params.uid;
         const updates = req.body;
         console.log(`in user controller BE: ${uid}`);
-        console.log(`in user controller BE: ${updates.lastName}`);
+        console.log(`in user controller BE: ${updates.email}`);
         const status = await dao.updateUser(uid, updates);
         res.json(status)
     }
