@@ -5,6 +5,7 @@ import session from 'express-session'
 import UsersController from "./users/users-controller.js";
 import ReviewsController from "./reviews/reviews-controller.js";
 import ReadingListsController from "./reading-lists/reading-lists-controller.js";
+import BookController from "./book/book-controller.js";
 
 /* connect to mongo database */
 const options = {
@@ -40,6 +41,7 @@ app.use(express.json())
 UsersController(app)
 ReviewsController(app)
 ReadingListsController(app)
+BookController(app)
 
 app.listen(4000)
 
