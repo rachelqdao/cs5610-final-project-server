@@ -25,18 +25,21 @@ const ReadingListsController = (app) => {
 
     const addBookToReadingList = async (req, res) => {
         const listID = req.params.listID
-        const bookInfo = req.body
+        const bookList = req.body
 
-        const status = await dao.addBookToReadingList(listID, bookInfo)
+        console.log(listID)
+        console.log(bookList)
 
-        res.json(status)
+        await dao.addBookToReadingList(listID, bookList)
+
+        res.json({listID, bookList})
     }
 
     const deleteBookFromReadingList = async (req, res) => {
         const listID = req.params.listID
         const bookInfo = req.body
 
-        const status = await dao.deleteBookFromReadingList(listID, bookInfo.id)
+        await dao.deleteBookFromReadingList(listID, bookInfo.id)
 
         res.json({listID, bookInfo})
     }
