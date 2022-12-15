@@ -1,5 +1,5 @@
 import  * as dao from "./book-clubs-dao.js";
-import {createBookClub} from "./book-clubs-dao.js";
+import {createBookClub, findAllBookClubs, findBookClubByOwnerID} from "./book-clubs-dao.js";
 
 const BookClubsController = (app) => {
     const createBookClub = async (req, res) => {
@@ -12,6 +12,17 @@ const BookClubsController = (app) => {
 
         const newBookClub = await dao.createBookClub(bookClub);
         res.json(newBookClub);
+    }
+
+    const findBookClubByOwnerID = async (req, res) => {
+        const ownerID = req.params.oid;
+        const bookClub = await dao.findBookClubByOwnerID(ownerID);
+        res.json(bookClub);
+    }
+
+    const findAllBookClubs = async (req, res) => {
+        const bookClubs = await dao.findAllBookClubs();
+        res.json(bookClubs);
     }
     //
     // const addUserToBookClub async (req, res) => {
@@ -32,6 +43,8 @@ const BookClubsController = (app) => {
 
 
     app.post('/book-clubs', createBookClub);
+    app.get('/book-clubs/:oid', findBookClubByOwnerID);
+    app.get('/book-clubs/', findAllBookClubs);
 }
 
 export default BookClubsController;

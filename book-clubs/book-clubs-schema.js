@@ -6,6 +6,7 @@ const bookClubsSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'usersModel',
         required: true,
+        unique: true
     },
     members: [
         {

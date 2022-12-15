@@ -6,6 +6,9 @@ export const createBookClub = (bookClub) =>{
     bookClubsModel.create(bookClub);
 }
 
+export const findBookClubByOwnerID = (oid) => {
+    bookClubsModel.findOne({oid}).populate("ownerID").exec();
+}
 
 export const findAllBookClubs = () =>
     bookClubsModel.find();
