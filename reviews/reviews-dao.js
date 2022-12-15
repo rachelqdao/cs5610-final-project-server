@@ -11,8 +11,16 @@ export const findReviewsByBookID = (bookID) =>
         .exec()
 
 export const findReviewsByUserID = (userID) =>
-    reviewsModel.find()
+    reviewsModel
+        .find({userID})
+        .populate('userID')
+        .exec()
 
 export const deleteReview = (reviewID) =>
     reviewsModel.findOneAndDelete({_id: reviewID})
 
+export const findAllReviews = () =>
+    reviewsModel
+        .find()
+        .populate('userID')
+        .exec()
