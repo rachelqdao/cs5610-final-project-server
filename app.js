@@ -6,6 +6,7 @@ import UsersController from "./users/users-controller.js";
 import ReviewsController from "./reviews/reviews-controller.js";
 import ReadingListsController from "./reading-lists/reading-lists-controller.js";
 import BookController from "./book/book-controller.js";
+import BookClubsController from "./book-clubs/book-clubs-controller.js";
 
 /* connect to mongo database */
 const options = {
@@ -38,6 +39,7 @@ app.use(session({
 app.use(express.json())
 
 /* controllers */
+BookClubsController(app)
 UsersController(app)
 ReviewsController(app)
 ReadingListsController(app)
