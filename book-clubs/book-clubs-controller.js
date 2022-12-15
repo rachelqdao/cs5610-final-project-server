@@ -6,7 +6,6 @@ const BookClubsController = (app) => {
         // we get the name in the body
         const bookClub = req.body;
         bookClub.ownerID = req.body.ownerID.ownerID;
-        console.log(`in controller with bc ${bookClub.name} and ${bookClub.ownerID}`)
         bookClub.members = [];
         bookClub.currentBook = {};
 
@@ -24,10 +23,20 @@ const BookClubsController = (app) => {
         const bookClubs = await dao.findAllBookClubs();
         res.json(bookClubs);
     }
-    //
-    // const addUserToBookClub async (req, res) => {
-    //     res.json(req.body) // TODO
-    // }
+
+    const findMembersByBCID = async (req, res) => {
+        const bcID = req.params.bcID;
+        const members = await dao.findMembersByBCID(bcID);
+        res.json(members);
+    }
+
+    const addMemberToBookClub = async (req, res) => {
+        const bcID = req.params.bcID;
+        const mid = req.params.mid;
+        const username = req.params.username;
+        await dao.addMemberToBookClub(bcID, mid, username);
+        res.json({bcID, mid, username});
+    }
     //
     // const updateCurrentBook async (req, res) => {
     //     res.json(req.body) // TODO
@@ -45,6 +54,8 @@ const BookClubsController = (app) => {
     app.post('/book-clubs', createBookClub);
     app.get('/book-clubs/:oid', findBookClubByOwnerID);
     app.get('/book-clubs/', findAllBookClubs);
+    app.get('/book-clubs/:bcID/members', findMembersByBCID);
+    app.put('/book-clubs/:bcID/:mid/:username', addMemberToBookClub);
 }
 
 export default BookClubsController;
