@@ -3,9 +3,9 @@ import {createBookClub, findAllBookClubs, findBookClubByOwnerID} from "./book-cl
 
 const BookClubsController = (app) => {
     const createBookClub = async (req, res) => {
-        // we get the name in the body
         const bookClub = req.body;
-        bookClub.ownerID = req.body.ownerID.ownerID;
+        const currentUser = req.session['currentUser'];
+        bookClub.ownerID = currentUser._id
         bookClub.members = [];
         bookClub.currentBook = {};
 
@@ -21,7 +21,7 @@ const BookClubsController = (app) => {
 
     const findAllBookClubs = async (req, res) => {
         const bookClubs = await dao.findAllBookClubs();
-        res.json(bookClubs);
+        res.json(bookClubs)
     }
 
     const findMembersByBCID = async (req, res) => {

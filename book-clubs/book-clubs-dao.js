@@ -1,13 +1,14 @@
 import bookClubsModel from "./book-clubs-model.js";
 import reviewsModel from "../reviews/reviews-model.js";
 
-export const createBookClub = (bookClub) => {
+export const createBookClub = (bookClub) =>
     bookClubsModel.create(bookClub);
-}
 
-export const findBookClubByOwnerID = (oid) => {
-    bookClubsModel.findOne({oid}).populate("ownerID").exec();
-}
+export const findBookClubByOwnerID = (oid) =>
+    bookClubsModel
+        .findOne({oid})
+        .populate("ownerID")
+        .exec();
 
 export const findAllBookClubs = () =>
     bookClubsModel.find();
