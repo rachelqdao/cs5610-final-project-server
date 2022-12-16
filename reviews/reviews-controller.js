@@ -31,11 +31,16 @@ const ReviewsController = (app) => {
         res.json(review)
     }
 
+    const findAllReviews = async (req, res) => {
+        const reviews = await dao.findAllReviews()
+        res.json(reviews)
+    }
+
     app.post('/reviews', createReview)
     app.get('/reviews/books/:bookID', findReviewsByBookID)
     app.get('/reviews/users/:userID', findReviewsByUserID)
     app.delete('/reviews/:reviewID', deleteReview)
-
+    app.get('/reviews', findAllReviews)
 }
 
 export default ReviewsController

@@ -68,7 +68,7 @@ const UsersController = (app) => {
     }
 
     const logout = async (req, res) => {
-        req.session.destroy()
+        req.session = null
         res.sendStatus(200)
     }
 
