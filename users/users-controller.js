@@ -27,8 +27,6 @@ const UsersController = (app) => {
     const updateUser = async (req, res) => {
         const uid = req.params.uid;
         const updates = req.body;
-        console.log(`in user controller BE: ${uid}`);
-        console.log(`in user controller BE: ${updates.email}`);
         const status = await dao.updateUser(uid, updates);
         res.json(status)
     }
@@ -59,16 +57,16 @@ const UsersController = (app) => {
         res.sendStatus(403)
     }
 
-    const profile = async (req, res) => {
-        if (req.session['currentUser']) {
-            res.json(req.session['currentUser'])
-            return
-        }
-        res.sendStatus(403)
-    }
+    // const profile = async (req, res) => {
+    //     if (req.session['currentUser']) {
+    //         res.json(req.session['currentUser'])
+    //         return
+    //     }
+    //     res.sendStatus(403)
+    // }
 
     const logout = async (req, res) => {
-        req.session = null
+        req.session = null;
         res.sendStatus(200)
     }
 
@@ -80,7 +78,7 @@ const UsersController = (app) => {
 
     app.post('/register', register)
     app.post('/login', login)
-    app.post('/profile', profile)
+    // app.post('/profile', profile)
     app.post('/logout', logout)
 }
 
