@@ -9,7 +9,8 @@ const reviewsSchema = mongoose.Schema({
     rating: Number,
     reviewText: String,
     datePosted: String,
-    timePosted: String
+    timePosted: String,
+    title: String
 }, {collection: 'reviews'})
 
 export default reviewsSchema
