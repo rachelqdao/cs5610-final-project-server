@@ -57,13 +57,13 @@ const UsersController = (app) => {
         res.sendStatus(403)
     }
 
-    // const profile = async (req, res) => {
-    //     if (req.session['currentUser']) {
-    //         res.json(req.session['currentUser'])
-    //         return
-    //     }
-    //     res.sendStatus(403)
-    // }
+    const profile = async (req, res) => {
+        if (req.session['currentUser']) {
+            res.json(req.session['currentUser'])
+            return
+        }
+        res.sendStatus(403)
+    }
 
     const logout = async (req, res) => {
         req.session = null;
